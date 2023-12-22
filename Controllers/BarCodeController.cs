@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
+using OpenIddict.Validation.AspNetCore;
 
 namespace BarcodeApi.Controllers
 {
-
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]/api/[action]")]
     [ApiController]
     public class BarCodeController : ControllerBase
@@ -103,6 +105,7 @@ namespace BarcodeApi.Controllers
         }
 
         [HttpGet(Name = "Test")]
+        [AllowAnonymous]
         public string Test()
         {
             return "test";
