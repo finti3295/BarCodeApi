@@ -84,7 +84,7 @@ namespace BarcodeApi.Controllers
             return BadRequest(ModelState);
         }
 
-   
+     
 
         private static void EnsureDatabaseCreated(ApplicationDbContext context)
         {
@@ -95,11 +95,6 @@ namespace BarcodeApi.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("Public")]
-        public IActionResult Public()
-        {
-            return Content("This is a public endpoint at Zirku.Api2 that does not require authorization.");
-        }
+        
     }
 }

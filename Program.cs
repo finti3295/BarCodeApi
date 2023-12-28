@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -116,6 +117,7 @@ builder.Services.AddOpenIddict()
 // Register the worker responsible of seeding the database with the sample clients.
 // Note: in a real world application, this step should be part of a setup script.
 builder.Services.AddHostedService<Worker>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -140,15 +142,13 @@ app.UseStaticFiles(new StaticFileOptions()
 });
 
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
+//Support other contollers Authentication
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
 
 
 //register gdpicture

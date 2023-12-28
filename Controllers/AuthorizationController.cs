@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using BarcodeApi.Models;
 using System.Collections.Immutable;
 using System.Security.Principal;
+using Microsoft.AspNetCore.Authorization;
+using OpenIddict.Client.AspNetCore;
 
 namespace BarcodeApi.Controllers
 {
@@ -88,6 +90,17 @@ namespace BarcodeApi.Controllers
             //    });
         }
 
+        [HttpGet("~/Public")]
+        [AllowAnonymous]
+        public IActionResult Public()
+        {
+            var result =  HttpContext.AuthenticateAsync(OpenIddictClientAspNetCoreDefaults.AuthenticationScheme);
+            //var r = Request.Headers["Referer"].ToString();
+            return Redirect("https://192.168.1.11:4200");
+            //var authorizationRequest = "https://www.google.com/";
+            //_httpContextAccessor.HttpContext.Response.Redirect(authorizationRequest);
+            //return Ok();
+        }
         #endregion
         #region private
         private async Task<IActionResult> RequestRefreshTokenGrantType(OpenIddictRequest request)
@@ -193,7 +206,7 @@ namespace BarcodeApi.Controllers
             }
 
             // Validate the username/password parameters and ensure the account is not locked out.
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: true);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
             if (!result.Succeeded)
             {
                 var properties = new AuthenticationProperties(new Dictionary<string, string?>
