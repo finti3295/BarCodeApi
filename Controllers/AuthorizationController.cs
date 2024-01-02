@@ -96,7 +96,7 @@ namespace BarcodeApi.Controllers
         {
             var result =  HttpContext.AuthenticateAsync(OpenIddictClientAspNetCoreDefaults.AuthenticationScheme);
             //var r = Request.Headers["Referer"].ToString();
-            return Redirect("https://192.168.1.11:4200");
+            return Redirect("https://10.0.30.23:4200");
             //var authorizationRequest = "https://www.google.com/";
             //_httpContextAccessor.HttpContext.Response.Redirect(authorizationRequest);
             //return Ok();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
 using OpenIddict.Validation.AspNetCore;
 
+
 namespace BarcodeApi.Controllers
 {
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
@@ -29,7 +30,11 @@ namespace BarcodeApi.Controllers
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName?.Trim('"')??DateTime.Now.ToString();
                     var fullPath = Path.Combine(pathToSave, fileName);
                     var dbPath = Path.Combine(folderName, fileName);
-                    
+                    using (FileStream DestinationStream = System.IO. File.Create(fullPath))
+                    {
+                         file.CopyTo(DestinationStream);
+                    }
+
                     return Ok(new { dbPath });
                 }
                 else
