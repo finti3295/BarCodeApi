@@ -101,6 +101,15 @@ builder.Services.AddOpenIddict()
                        .EnableLogoutEndpointPassthrough()
                        .EnableStatusCodePagesIntegration()
                        .EnableTokenEndpointPassthrough();
+
+        //options.Configure(config =>
+        //{
+        //    // Enable sliding expiration
+        //    //config.UseSlidingExpiration = true;
+        //    // Set access token expiry time span
+        //    config.AccessTokenLifetime = TimeSpan.FromMinutes(1);
+        //    config.RefreshTokenLifetime = TimeSpan.FromDays(30);
+        //});
     })
 
     // Register the OpenIddict validation components.

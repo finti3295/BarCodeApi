@@ -22,7 +22,7 @@ namespace BarcodeApi.Controllers
             try
             {
                 var formCollection = await Request.ReadFormAsync();
-                var file = formCollection.Files.First();
+                var file = formCollection.Files[0];
                 var folderName = Path.Combine("Resources", "video");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 if (file.Length > 0)
